@@ -137,10 +137,7 @@ bool result(bool b, char c, bool a) {
 		return(a || b);
 		break;
 	case '~':
-		if (a && (!b))
-			return(0);
-		else
-			return(1);
+			return(!(b && (!a)));
 		break;
 	case '#':
 		if (a == b)
