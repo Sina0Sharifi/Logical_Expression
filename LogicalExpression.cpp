@@ -29,7 +29,7 @@ public:
 			return 0;
 	}
 };
-bool operatorr(int&, char, char);
+bool operatorr(int, char, char);
 bool result(bool, char, bool);
 int main() {
 	while (1) {
@@ -110,7 +110,7 @@ int main() {
 		cout << "finish =" << stack1.pop()<<endl;
 	}
 }
-bool operatorr(int& parantez, char p, char in) {
+bool operatorr(int parantez, char p, char in) {
 	char op[] = { '#','~','|','^','!','(' };
 	short int a = -1, b = -1;
 	if (p == '(')
