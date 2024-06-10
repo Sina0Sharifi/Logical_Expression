@@ -29,7 +29,7 @@ public:
 			return 0;
 	}
 };
-bool operatorr(int, char, char);
+bool operatorr(char, char);
 bool result(bool, char, bool);
 int main() {
 	while (1) {
@@ -73,22 +73,17 @@ int main() {
 						else
 							stack1.push(result(stack1.pop(), stack3.pop(), stack1.pop()));
 					}
-					char a = stack3.pop();
-					parantez = parantez - 5;
+					stack3.pop();
 				}
 				else if (stack3.empty()) {
-					if (LogicalExpression[i] == '(')
-						parantez = 5 + parantez;
 					stack3.push(LogicalExpression[i]);
 				}
-				else if (!stack3.empty() && operatorr(parantez, stack3.peek(), LogicalExpression[i])) {
-					if (LogicalExpression[i] == '(')
-						parantez = 5 + parantez;
+				else if (!stack3.empty() && operatorr(stack3.peek(), LogicalExpression[i])) {
 					stack3.push(LogicalExpression[i]);
 				}
 				else
 				{
-					while (!operatorr(parantez, stack3.peek(), LogicalExpression[i]) && !stack3.empty()) {
+					while (!operatorr(stack3.peek(), LogicalExpression[i]) && !stack3.empty()) {
 						if (stack3.peek() == '!')
 							stack1.push(result(stack1.pop(), stack3.pop(), 0));
 						else
@@ -110,8 +105,8 @@ int main() {
 		cout << "finish =" << stack1.pop()<<endl;
 	}
 }
-bool operatorr(int parantez, char p, char in) {
-	char op[] = { '#','~','|','^','!','(' };
+bool operatorr(char p, char in) {
+	char op[] = { '#','~','|','^'};
 	short int a = -1, b = -1;
 	if (p == '(')
 		return true;
@@ -119,9 +114,9 @@ bool operatorr(int parantez, char p, char in) {
 		return true;
 	for (short int i = 0; a == -1 || b == -1; i++) {
 		if (p == op[i])
-			a = i + parantez;
+			a = i ;
 		if (in == op[i])
-			b = i + parantez;
+			b = i;
 	}
 	if (a < b)
 		return true;
